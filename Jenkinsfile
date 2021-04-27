@@ -1,15 +1,21 @@
 pipeline {
   agent any
+  tools {
+    maven 'M2_HOME'
+  }
   stages {
-    stage ('tacs') {
+    stage ('build') {
       steps{
-      echo "how are you doing tacs"
+      sh 'mvn clean'
+      sh 'mvn install'
+      sh 'mvn package'  
         sleep 4
       }
     }
     stage ('test') {
       steps{
-      echo "hello build"
+      echo "hello test"
+      sh 'mvn test'
         sleep 4
       }
     }
